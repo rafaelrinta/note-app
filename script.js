@@ -1,51 +1,46 @@
 const form = document.querySelector('form');
 const titleInput = form.elements.noteTitle;
-const bodyInput = form.elements.noteBody; // Menambahkan ini untuk mengambil input tubuh catatan
+const bodyInput = form.elements.noteBody;
 
 form.addEventListener('submit', (event) => event.preventDefault());
 
 const customValidationHandler = (event) => {
-  event.target.setCustomValidity('');
+    event.target.setCustomValidity('');
 
-  if (event.target.validity.valueMissing) {
-    event.target.setCustomValidity('Wajib diisi.');
-    return;
-  }
+    if (event.target.validity.valueMissing) {
+        event.target.setCustomValidity('Wajib diisi.');
+        return;
+    }
 };
 
-// Menambahkan event listener dan handler untuk judul catatan
 titleInput.addEventListener('change', customValidationHandler);
 titleInput.addEventListener('invalid', customValidationHandler);
 
-// Menambahkan event listener dan handler untuk tubuh catatan
 bodyInput.addEventListener('change', customValidationHandler);
 bodyInput.addEventListener('invalid', customValidationHandler);
 
-// Menambahkan event listener untuk menangani blur event
 titleInput.addEventListener('blur', handleValidation);
 bodyInput.addEventListener('blur', handleValidation);
 
 function handleValidation(event) {
-  const isValid = event.target.validity.valid;
-  const errorMessage = event.target.validationMessage;
+    const isValid = event.target.validity.valid;
+    const errorMessage = event.target.validationMessage;
 
-  const connectedValidationId = event.target.getAttribute('aria-describedby');
-  const connectedValidationEl = connectedValidationId
-    ? document.getElementById(connectedValidationId)
-    : null;
+    const connectedValidationId = event.target.getAttribute('aria-describedby');
+    const connectedValidationEl = connectedValidationId
+        ? document.getElementById(connectedValidationId)
+        : null;
 
-  if (connectedValidationEl && errorMessage && !isValid) {
-    connectedValidationEl.innerText = errorMessage;
-  } else {
-    connectedValidationEl.innerText = '';
-  }
+    if (connectedValidationEl) {
+        if (errorMessage && !isValid) {
+            connectedValidationEl.innerText = errorMessage;
+        } else {
+            connectedValidationEl.innerText = '';
+        }
+    }
 }
 
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     customElements.define('custom-heading', CustomHeading);
     customElements.define('notes-list', NotesList);
     customElements.define('footer-custom', FooterCustom);
@@ -53,14 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const noteForm = document.getElementById('noteForm');
     const notesList = document.querySelector('notes-list');
 
-    noteForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Mencegah form dari melakukan submit default
+    noteForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-        // Ambil nilai dari input judul dan isi catatan
         const title = document.getElementById('noteTitle').value;
         const body = document.getElementById('noteBody').value;
 
-        // Buat elemen baru untuk catatan
         const noteElement = document.createElement('div');
         noteElement.classList.add('note');
 
@@ -73,40 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
         noteElement.appendChild(titleElement);
         noteElement.appendChild(bodyElement);
 
-        // Sisipkan catatan baru di awal daftar catatan
-        notesData.unshift({ title, body }); // Tambahkan catatan baru ke awal array
-        notesList.updateList(); // Perbarui tampilan notes-list setelah menambahkan catatan baru
+        notesData.unshift({ title, body });
+        notesList.updateList();
 
-        // Bersihkan nilai input setelah catatan ditambahkan
         document.getElementById('noteTitle').value = '';
         document.getElementById('noteBody').value = '';
-
-        // Perbarui tampilan notes-list setelah menambahkan catatan baru
-    
     });
-
-    // // Menampilkan data dummy yang telah diberikan sebelumnya
-    // notesData.forEach(function(note) {
-    //     const noteElement = document.createElement('div');
-    //     noteElement.classList.add('note');
-
-    //     const titleElement = document.createElement('h2');
-    //     titleElement.textContent = note.title;
-
-    //     const bodyElement = document.createElement('p');
-    //     bodyElement.textContent = note.body;
-
-    //     noteElement.appendChild(titleElement);
-    //     noteElement.appendChild(bodyElement);
-
-    //     notesList.appendChild(noteElement);
-    // });
 });
 
 class CustomHeading extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' }); // Attach shadow DOM
+        this.attachShadow({ mode: 'open' });
         const title = this.getAttribute('title') || 'Custom Heading';
         this.shadowRoot.innerHTML = `
             <style>
@@ -135,13 +106,12 @@ class NotesList extends HTMLElement {
             <style>
                 .notes-grid {
                     display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 20px;
+                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                    gap: 40px 60px;
                     justify-items: center;
                     padding: 20px;
                     border: 4px solid #008DDA;
                     border-radius: 20px;
-                    width: 100%
                 }
 
                 .note {
@@ -183,8 +153,8 @@ class NotesList extends HTMLElement {
 class FooterCustom extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' }); // Attach shadow DOM
-        const text = this.getAttribute('text') || 'Custom Footer'; // Ambil nilai custom attribute 'text'
+        this.attachShadow({ mode: 'open' });
+        const text = this.getAttribute('text') || 'Custom Footer';
         this.shadowRoot.innerHTML = `
             <footer>${text}</footer>
         `;

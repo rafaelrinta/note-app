@@ -23,13 +23,14 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    
+
 }
 
 form {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    position: sticky;
 }
 
 label {
@@ -62,21 +63,11 @@ button:hover {
 
 .notes-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px 60px;
     justify-items: center;
     padding: 20px;
 }
-
-/* .note {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.note h2 {
-    margin-top: 0;
-} */
 
 footer {
     background-color: #008DDA;
@@ -85,7 +76,8 @@ footer {
     text-align: center;
 }
 
-/* .main-footer {
-    padding: 8px 16px;
-    text-align: center;
-} */
+@media screen and (max-width: 768px) {
+    main {
+        padding: 20px 40px;
+    }
+}
