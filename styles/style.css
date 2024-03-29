@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #008DDA;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -13,7 +13,7 @@ header {
 
 custom-heading {
     display: block;
-    background-color: #333;
+    background-color: #008DDA;
     padding: 20px;
     text-align: center;
 }
@@ -23,13 +23,12 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    
 }
 
 form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 400px;
     margin-bottom: 20px;
 }
 
@@ -42,7 +41,7 @@ textarea {
     width: 100%;
     padding: 8px;
     margin: 5px 0 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -50,7 +49,7 @@ textarea {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #008DDA;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -66,11 +65,10 @@ button:hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     justify-items: center;
-    align-items: center;
     padding: 20px;
 }
 
-.note {
+/* .note {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -78,16 +76,16 @@ button:hover {
 
 .note h2 {
     margin-top: 0;
-}
+} */
 
 footer {
-    background-color: #333;
+    background-color: #008DDA;
     color: #fff;
     padding: 20px;
     text-align: center;
 }
 
-.main-footer {
+/* .main-footer {
     padding: 8px 16px;
     text-align: center;
-}
+} */

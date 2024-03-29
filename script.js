@@ -131,7 +131,32 @@ class NotesList extends HTMLElement {
     }
 
     updateList() {
-        this.shadowRoot.innerHTML = '';
+        this.shadowRoot.innerHTML = `
+            <style>
+                .notes-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 20px;
+                    justify-items: center;
+                    padding: 20px;
+                    border: 4px solid #008DDA;
+                    border-radius: 20px;
+                    width: 100%
+                }
+
+                .note {
+                    border: 5px solid #008DDA;
+                    border-radius: 20px;
+                    padding: 20px;
+                    background-color: #008DDA;
+                    color: #ccc;
+                }
+                
+                .note h2 {
+                    margin-top: 0;
+                }
+            </style>
+        `;
         const notesDataElement = document.createElement('div');
         notesDataElement.classList.add("notes-grid");
 
